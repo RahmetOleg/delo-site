@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Заявка с сайта «ДЕЛО»: имя, контакт и контекст задачи
+model Lead {
+  id        String   @id @default(cuid())
+  name      String   // Имя отправителя
+  contact   String   // Телефон или Telegram
+  task      String?  // Тип задачи (сайт/магазин/программа/приложение)
+  budget    String?  // Ориентир по бюджету
+  message   String?  // Пара слов о задаче
+  estimate  String?  // Прикидка из калькулятора (сумма + состав)
+  status    String   @default("new") // new | in_progress | done
+  createdAt DateTime @default(now())
+}
