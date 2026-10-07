@@ -1,29 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Golos_Text, Prata, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-
-/* Шрифты с кириллицей: Golos Text — основной, Prata — serif-акценты, JetBrains Mono — лейблы */
-const golos = Golos_Text({
-  variable: "--font-golos",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-const prata = Prata({
-  variable: "--font-prata",
-  subsets: ["latin", "cyrillic"],
-  weight: "400",
-  display: "swap",
-});
-
-const jbmono = JetBrains_Mono({
-  variable: "--font-jbmono",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "ДЕЛО — сайт или приложение, которое приносит клиентов",
@@ -57,7 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="dark" suppressHydrationWarning>
-      <body className={`${golos.variable} ${prata.variable} ${jbmono.variable} antialiased bg-background text-foreground`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=Prata&family=JetBrains+Mono:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased bg-background text-foreground">
         {children}
         <Toaster position="bottom-right" richColors closeButton />
       </body>
